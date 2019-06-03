@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
@@ -17,6 +18,7 @@ import { ThreadifyComponent } from './components/threadify/threadify.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule

@@ -9,4 +9,18 @@ export class ThreadsService {
   constructor(
     private firestore: AngularFirestore
   ) { }
+
+  getThreads() {
+    return this.firestore.collection('threads_main', ref => ref.orderBy('timestamp', 'asc')).snapshotChanges();
+  }
+
+  createThread(data) {
+    var thread = {
+      message: data,
+      timestamp: new Date()
+    }
+    return new Promise<any>((resolve, reject) => {
+      this.firestore.collection('threads_main').add(thread).then(res => { }, err => { reject(err) });
+    })
+  }
 }
