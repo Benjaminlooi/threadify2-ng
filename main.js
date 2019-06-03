@@ -127,13 +127,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/index.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angular-bootstrap-md */ "./node_modules/angular-bootstrap-md/fesm5/angular-bootstrap-md.js");
-/* harmony import */ var _components_threadify_threadify_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/threadify/threadify.component */ "./src/app/components/threadify/threadify.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/index.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! angular-bootstrap-md */ "./node_modules/angular-bootstrap-md/fesm5/angular-bootstrap-md.js");
+/* harmony import */ var _components_threadify_threadify_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/threadify/threadify.component */ "./src/app/components/threadify/threadify.component.ts");
+
 
 
 
@@ -150,18 +152,19 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
-                _components_threadify_threadify_component__WEBPACK_IMPORTED_MODULE_9__["ThreadifyComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+                _components_threadify_threadify_component__WEBPACK_IMPORTED_MODULE_10__["ThreadifyComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
-                angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_8__["MDBBootstrapModule"].forRoot(),
-                _angular_fire__WEBPACK_IMPORTED_MODULE_4__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].firebaseConfig),
-                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestoreModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_9__["MDBBootstrapModule"].forRoot(),
+                _angular_fire__WEBPACK_IMPORTED_MODULE_5__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].firebaseConfig),
+                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestoreModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -178,7 +181,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper row justify-content-center\">\n    <div class=\"thread-wrapper col\">\n      <div class=\"thread\">test1</div>\n    </div>\n\n\n    <form>\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input mdbInput type=\"text\" class=\"form-control\" id=\"inputThread\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <button type=\"submit\" class=\"btn btn-primary btn-md w-100\">Spank Me</button>\n        </div>\n      </div>\n    </form>\n\n\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-auto row justify-content-center\">\n\n    <div class=\"thread-wrapper col\">\n      <div class=\"second-wrapper\" #container>\n\n        <ng-container *ngIf=\"threads\">\n\n          <div *ngFor=\"let thread of threads\" class=\"thread\">\n            {{thread.payload.doc.data().message}}\n          </div>\n        </ng-container>\n\n      </div>\n    </div>\n\n\n    <form (submit)=\"onSubmit(threadInput.value)\">\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input #threadInput mdbInput [(ngModel)]=\"threadInput2\" type=\"text\" class=\"form-control\" id=\"inputThread\" name=\"first\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <a (click)=\"onSubmit(threadInput.value)\" class=\"btn btn-primary btn-md w-100\">Spank Me</a>\n        </div>\n      </div>\n    </form>\n\n\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -189,7 +192,7 @@ module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper row j
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  height: 100vh;\n  width: 100vw; }\n\nform {\n  position: absolute;\n  width: 100%;\n  bottom: 15px; }\n\n.form-control {\n  margin: 0.375rem; }\n\n.main-wrapper {\n  height: 100%;\n  position: relative; }\n\n.thread-wrapper {\n  position: absolute;\n  bottom: 75px; }\n\n.thread {\n  padding-left: 8px;\n  margin: 12px 0;\n  border-left: 4px solid #acacac; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aHJlYWRpZnkvRDpcXHhhbXBwXFxodGRvY3NcXGJlbnNhbml0eVxcdGhyZWFkaWZ5Mi1uZy9zcmNcXGFwcFxcY29tcG9uZW50c1xcdGhyZWFkaWZ5XFx0aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsWUFBWSxFQUFBOztBQUdkO0VBQ0Usa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxZQUFZLEVBQUE7O0FBR2Q7RUFDRSxnQkFBZ0IsRUFBQTs7QUFHbEI7RUFDRSxZQUFZO0VBQ1osa0JBQWtCLEVBQUE7O0FBR3BCO0VBQ0Usa0JBQWtCO0VBQ2xCLFlBQVksRUFBQTs7QUFHZDtFQUNFLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsOEJBQThCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RocmVhZGlmeS90aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVye1xyXG4gIGhlaWdodDogMTAwdmg7XHJcbiAgd2lkdGg6IDEwMHZ3O1xyXG59XHJcblxyXG5mb3Jte1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB3aWR0aDogMTAwJTtcclxuICBib3R0b206IDE1cHg7XHJcbn1cclxuXHJcbi5mb3JtLWNvbnRyb2x7XHJcbiAgbWFyZ2luOiAwLjM3NXJlbTtcclxufVxyXG5cclxuLm1haW4td3JhcHBlcntcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4udGhyZWFkLXdyYXBwZXJ7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGJvdHRvbTogNzVweDtcclxufVxyXG5cclxuLnRocmVhZHtcclxuICBwYWRkaW5nLWxlZnQ6IDhweDtcclxuICBtYXJnaW46IDEycHggMDtcclxuICBib3JkZXItbGVmdDogNHB4IHNvbGlkICNhY2FjYWM7XHJcbn1cclxuXHJcbiJdfQ== */"
+module.exports = ".container {\n  height: 100vh;\n  width: 100vw; }\n\nform {\n  position: absolute;\n  width: 100%;\n  bottom: 15px; }\n\n.form-control {\n  margin: 0.375rem; }\n\n.main-wrapper {\n  height: 100%;\n  position: relative;\n  max-width: 720px; }\n\n.thread-wrapper {\n  height: 100vh;\n  padding-bottom: 66.1px; }\n\n.second-wrapper {\n  position: relative;\n  height: 100%;\n  overflow-y: scroll; }\n\n.thread {\n  padding-left: 8px;\n  margin: 12px 0;\n  border-left: 4px solid #acacac; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aHJlYWRpZnkvRDpcXHhhbXBwXFxodGRvY3NcXGJlbnNhbml0eVxcdGhyZWFkaWZ5Mi1uZy9zcmNcXGFwcFxcY29tcG9uZW50c1xcdGhyZWFkaWZ5XFx0aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsWUFBWSxFQUFBOztBQUdkO0VBQ0Usa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxZQUFZLEVBQUE7O0FBR2Q7RUFDRSxnQkFBZ0IsRUFBQTs7QUFHbEI7RUFDRSxZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLGdCQUFnQixFQUFBOztBQUdsQjtFQUNFLGFBQWE7RUFDYixzQkFBc0IsRUFBQTs7QUFHeEI7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGtCQUFrQixFQUFBOztBQUdwQjtFQUNFLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsOEJBQThCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RocmVhZGlmeS90aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVye1xyXG4gIGhlaWdodDogMTAwdmg7XHJcbiAgd2lkdGg6IDEwMHZ3O1xyXG59XHJcblxyXG5mb3Jte1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB3aWR0aDogMTAwJTtcclxuICBib3R0b206IDE1cHg7XHJcbn1cclxuXHJcbi5mb3JtLWNvbnRyb2x7XHJcbiAgbWFyZ2luOiAwLjM3NXJlbTtcclxufVxyXG5cclxuLm1haW4td3JhcHBlcntcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIG1heC13aWR0aDogNzIwcHg7XHJcbn1cclxuXHJcbi50aHJlYWQtd3JhcHBlcntcclxuICBoZWlnaHQ6IDEwMHZoO1xyXG4gIHBhZGRpbmctYm90dG9tOiA2Ni4xcHg7XHJcbn1cclxuXHJcbi5zZWNvbmQtd3JhcHBlcntcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcclxufVxyXG5cclxuLnRocmVhZHtcclxuICBwYWRkaW5nLWxlZnQ6IDhweDtcclxuICBtYXJnaW46IDEycHggMDtcclxuICBib3JkZXItbGVmdDogNHB4IHNvbGlkICNhY2FjYWM7XHJcbn1cclxuXHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -205,22 +208,97 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThreadifyComponent", function() { return ThreadifyComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/threads.service */ "./src/app/services/threads.service.ts");
+
+
 
 
 var ThreadifyComponent = /** @class */ (function () {
-    function ThreadifyComponent() {
+    function ThreadifyComponent(threadsService) {
+        var _this = this;
+        this.threadsService = threadsService;
+        this.getCoffeeOrders = function () {
+            _this.threadsService.getThreads().subscribe(function (res) {
+                _this.threads = res;
+                setTimeout(function () {
+                    _this.scrollToBottom();
+                }, 50);
+            });
+        };
     }
     ThreadifyComponent.prototype.ngOnInit = function () {
+        this.getCoffeeOrders();
+        this.scrollToBottom();
     };
+    ThreadifyComponent.prototype.ngAfterViewInit = function () {
+        this.scrollToBottom();
+    };
+    ThreadifyComponent.prototype.onSubmit = function (data) {
+        this.threadInput2 = '';
+        this.threadsService.createThread(data);
+    };
+    ThreadifyComponent.prototype.scrollToBottom = function () {
+        this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('container'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], ThreadifyComponent.prototype, "container", void 0);
     ThreadifyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-threadify',
             template: __webpack_require__(/*! ./threadify.component.html */ "./src/app/components/threadify/threadify.component.html"),
             styles: [__webpack_require__(/*! ./threadify.component.scss */ "./src/app/components/threadify/threadify.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__["ThreadsService"]])
     ], ThreadifyComponent);
     return ThreadifyComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/threads.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/threads.service.ts ***!
+  \*********************************************/
+/*! exports provided: ThreadsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThreadsService", function() { return ThreadsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+
+
+
+var ThreadsService = /** @class */ (function () {
+    function ThreadsService(firestore) {
+        this.firestore = firestore;
+    }
+    ThreadsService.prototype.getThreads = function () {
+        return this.firestore.collection('threads_main', function (ref) { return ref.orderBy('timestamp', 'asc'); }).snapshotChanges();
+    };
+    ThreadsService.prototype.createThread = function (data) {
+        var _this = this;
+        var thread = {
+            message: data,
+            timestamp: new Date()
+        };
+        return new Promise(function (resolve, reject) {
+            _this.firestore.collection('threads_main').add(thread).then(function (res) { }, function (err) { reject(err); });
+        });
+    };
+    ThreadsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])
+    ], ThreadsService);
+    return ThreadsService;
 }());
 
 
