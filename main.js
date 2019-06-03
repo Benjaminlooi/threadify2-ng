@@ -178,7 +178,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper row justify-content-center\">\n    <div class=\"thread-wrapper col\">\n      <div class=\"thread\">test1</div>\n      <div class=\"thread\">test2</div>\n      <div class=\"thread\">test3</div>\n    </div>\n\n\n    <form>\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input mdbInput type=\"text\" class=\"form-control\" id=\"inputThread\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <button type=\"submit\" class=\"btn btn-primary btn-md w-100\">Spank Me</button>\n        </div>\n      </div>\n    </form>\n\n\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper row justify-content-center\">\n    <div class=\"thread-wrapper col\">\n      <div class=\"thread\">test1</div>\n    </div>\n\n\n    <form>\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input mdbInput type=\"text\" class=\"form-control\" id=\"inputThread\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <button type=\"submit\" class=\"btn btn-primary btn-md w-100\">Spank Me</button>\n        </div>\n      </div>\n    </form>\n\n\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
