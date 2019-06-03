@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyCK5tDu2zmXDw3lSHc9rTsPPe5jYzQEO4M",
+    authDomain: "threadifyng.firebaseapp.com",
+    databaseURL: "https://threadifyng.firebaseio.com",
+    projectId: "threadifyng",
+    storageBucket: "threadifyng.appspot.com",
+    messagingSenderId: "40407034699",
+    appId: "1:40407034699:web:23476a3a6622bcdf"
+  }
 };
 
 /*
