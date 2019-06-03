@@ -36,3 +36,8 @@ form{
   border-left: 4px solid #acacac;
 }
 
+@media (max-width: 768px){
+  .thread-wrapper{
+    padding-bottom: 106.1px;
+  }
+}

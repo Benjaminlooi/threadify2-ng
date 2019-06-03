@@ -17,19 +17,28 @@ export class ThreadifyComponent implements OnInit {
     this.getCoffeeOrders();
     this.scrollToBottom();
   }
-  
+
+  ngAfterViewInit(): void {
+    this.scrollToBottom();
+
+  }
+
   @ViewChild('container') container;
 
   threads;
   getCoffeeOrders = () => {
-    return this.threadsService.getThreads().subscribe(res => (this.threads = res), err => console.log(err), () => { this.scrollToBottom(); });
+    this.threadsService.getThreads().subscribe(res => {
+      this.threads = res;
+      setTimeout( () => {
+        this.scrollToBottom();
+      }, 50);  
+    });
   }
 
   threadInput2: string;
   onSubmit(data) {
     this.threadInput2 = '';
     this.threadsService.createThread(data);
-    this.scrollToBottom();
   }
 
   private scrollToBottom() {
