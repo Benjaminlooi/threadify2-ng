@@ -196,7 +196,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div  *ngIf=\"auth.user$ | async as user; else login\">\n  {{user|json}}\n  <hr>\n  <button class=\"button\" (click)=\"auth.signOut()\">Sign Out</button>\n</div>\n\n<ng-template #login>\n  <button class=\"button\" (click)=\"auth.googleSignin()\">Sign in</button>\n</ng-template>\n"
+module.exports = "<div *ngIf=\"auth.user$ | async as user; else login\">\n\n  <pre>\n      {{user|json}}\n  </pre>  \n  <hr>\n  <button class=\"button\" (click)=\"auth.signOut()\">Sign Out</button>\n</div>\n\n<ng-template #login>\n  <button class=\"button\" (click)=\"auth.googleSignin()\">Sign in</button>\n</ng-template>\n"
 
 /***/ }),
 
@@ -311,7 +311,7 @@ var NotFoundComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-auto row justify-content-center\">\n\n    <div class=\"thread-wrapper col\">\n      <div class=\"second-wrapper\" #container>\n\n        <ng-container *ngIf=\"threads\">\n\n          <div *ngFor=\"let thread of threads\" class=\"thread\">\n            <p class=\"sender-name\">{{thread.payload.doc.data().sender}}</p>\n            <span class=\"thread-message\">{{thread.payload.doc.data().message}}</span>\n            <span class=\"date\">{{thread.payload.doc.data().timestamp.toDate() | date: 'MMM d, h:mm a' }}</span>\n          </div>\n        </ng-container>\n\n      </div>\n    </div>\n\n    <form (submit)=\"onSubmit(threadInput.value)\">\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input #threadInput mdbInput [(ngModel)]=\"threadInput2\" type=\"text\" class=\"form-control\" id=\"inputThread\" name=\"first\" placeholder=\"Threadify\" autocomplete=\"off\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <a (click)=\"onSubmit(threadInput.value)\" class=\"btn btn-primary btn-md w-100\">Spank Me</a>\n        </div>\n      </div>\n    </form>\n\n  </div>\n\n</div>\n\n\n<div mdbModal #name_input_modal=\"mdbModal\" class=\"modal fade right\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myBasicModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title w-100\" id=\"myModalLabel\">Enter your name</h4>\n      </div>\n      <div class=\"modal-body\">\n        <input #name_input type=\"text\" placeholder=\"name\">\n      </div>\n      <div class=\"modal-footer justify-content-center\">\n        <button (click)=\"name_submit(name_input.value)\" type=\"button\" mdbBtn color=\"primary\" class=\"relative waves-light\" mdbWavesEffect>OK!</button>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-auto row justify-content-center\">\n\n    <div class=\"thread-wrapper col\">\n      <div class=\"second-wrapper\" #container>\n\n        <ng-container *ngIf=\"threads\">\n\n          <div *ngFor=\"let thread of threads\" class=\"thread\">\n            <p class=\"sender-name\">{{thread.payload.doc.data().sender}}</p>\n            <span class=\"thread-message\">{{thread.payload.doc.data().message}}</span>\n            <span class=\"date\">{{thread.payload.doc.data().timestamp.toDate() | date: 'MMM d, h:mm a' }}</span>\n          </div>\n        </ng-container>\n\n      </div>\n    </div>\n\n    <form (submit)=\"onSubmit(threadInput.value)\">\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input #threadInput mdbInput [(ngModel)]=\"threadInput2\" type=\"text\" class=\"form-control\" id=\"inputThread\" name=\"first\" placeholder=\"Threadify\" autocomplete=\"off\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <a (click)=\"onSubmit(threadInput.value)\" class=\"btn btn-primary btn-md w-100\">Spank Me</a>\n        </div>\n      </div>\n    </form>\n\n  </div>\n\n</div>\n\n\n<div mdbModal #name_input_modal=\"mdbModal\" class=\"modal fade right\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myBasicModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title w-100\" id=\"myModalLabel\">Login with Google</h4>\n      </div>\n      <div class=\"modal-body\">\n        <app-login></app-login>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -340,16 +340,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/threads.service */ "./src/app/services/threads.service.ts");
 /* harmony import */ var angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular-bootstrap-md */ "./node_modules/angular-bootstrap-md/fesm5/angular-bootstrap-md.js");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
+
 
 
 
 
 
 var ThreadifyComponent = /** @class */ (function () {
-    function ThreadifyComponent(threadsService) {
+    function ThreadifyComponent(threadsService, auth) {
         var _this = this;
         this.threadsService = threadsService;
-        this.getCoffeeOrders = function () {
+        this.auth = auth;
+        this.getAllThreads = function () {
             _this.threadsService.getThreads().subscribe(function (res) {
                 _this.threads = res;
                 setTimeout(function () {
@@ -359,21 +362,23 @@ var ThreadifyComponent = /** @class */ (function () {
         };
     }
     ThreadifyComponent.prototype.ngOnInit = function () {
-        this.getCoffeeOrders();
+        var _this = this;
+        this.getAllThreads();
+        this.auth.user$.subscribe(function (res) {
+            if (res) {
+                _this.user = res;
+            }
+        });
     };
     ThreadifyComponent.prototype.ngAfterViewInit = function () {
         this.name_input_modal.show();
-    };
-    ThreadifyComponent.prototype.name_submit = function (name) {
-        this.name_input_modal.hide();
-        this.sender_name = name;
     };
     ThreadifyComponent.prototype.onSubmit = function (thread_message) {
         if (thread_message) {
             this.threadInput2 = '';
             var data = {
                 message: thread_message,
-                sender: this.sender_name,
+                sender: this.user.displayName,
                 timestamp: new Date()
             };
             this.threadsService.createThread(data);
@@ -396,7 +401,8 @@ var ThreadifyComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./threadify.component.html */ "./src/app/components/threadify/threadify.component.html"),
             styles: [__webpack_require__(/*! ./threadify.component.scss */ "./src/app/components/threadify/threadify.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__["ThreadsService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__["ThreadsService"],
+            src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], ThreadifyComponent);
     return ThreadifyComponent;
 }());
@@ -454,12 +460,13 @@ var AuthService = /** @class */ (function () {
                         return [4 /*yield*/, this.afAuth.auth.signInWithPopup(provider)];
                     case 1:
                         credential = _a.sent();
+                        this.user_cred = credential.user;
                         return [2 /*return*/, this.updateUserData(credential.user)];
                 }
             });
         });
     };
-    AuthService.prototype.singOut = function () {
+    AuthService.prototype.signOut = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
@@ -472,11 +479,13 @@ var AuthService = /** @class */ (function () {
         });
     };
     AuthService.prototype.updateUserData = function (_a) {
-        var uid = _a.uid, email = _a.email;
+        var uid = _a.uid, email = _a.email, displayName = _a.displayName;
         var userRef = this.afs.doc("users/" + uid);
+        console.log(userRef);
         var data = {
             uid: uid,
-            email: email
+            email: email,
+            displayName: displayName
         };
         return userRef.set(data, { merge: true });
     };
