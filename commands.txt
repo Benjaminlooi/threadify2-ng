@@ -1,0 +1,2 @@
+ng build --base-href "https://benjaminlooi.github.io/threadify2-ng/"
+ngh --dir=dist/threadify2-ng
