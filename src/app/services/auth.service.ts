@@ -29,27 +29,32 @@ export class AuthService {
     )
   }
 
+
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
-    return this.updateUserData(credential.user);
+    return this.addUserDataIfNotExist(credential.user);
   }
 
   async signOut() {
     await this.afAuth.auth.signOut();
   }
 
-  private updateUserData({ uid, email, displayName }: User) {
+  private addUserDataIfNotExist({ uid, email, displayName }: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
+    userRef.valueChanges().subscribe(res => {
+      if (!res) {
+        console.log('doesnt exist')
+        const data = {
+          uid,
+          email,
+          displayName
+        };
 
-    console.log(userRef)
+        return userRef.set(data, { merge: true });
+      }
+    })
 
-    const data = {
-      uid,
-      email,
-      displayName
-    };
 
-    return userRef.set(data, { merge: true });
   }
 }

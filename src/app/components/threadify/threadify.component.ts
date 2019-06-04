@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThreadsService } from 'src/app/services/threads.service';
 import { Directive, Input, ViewChild } from '@angular/core';
-import { ModalDirective } from 'angular-bootstrap-md';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-threadify',
@@ -10,29 +10,28 @@ import { ModalDirective } from 'angular-bootstrap-md';
 })
 export class ThreadifyComponent implements OnInit {
 
+  private user;
+  private threads;
+  threadInput2: string;
+
+  
   constructor(
-    private threadsService: ThreadsService
+    private threadsService: ThreadsService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.getCoffeeOrders();
+    this.getAllThreads();
+    this.auth.user$.subscribe(res=> {
+      if(res){
+        this.user = res;
+      }
+    });
   }
 
-  ngAfterViewInit(): void {
-    this.name_input_modal.show();
-  }
-
-  @ViewChild('name_input_modal') name_input_modal: ModalDirective;
   @ViewChild('container') container;
 
-  sender_name: string;
-  name_submit(name) {
-    this.name_input_modal.hide();
-    this.sender_name = name;
-  }
-
-  threads;
-  getCoffeeOrders = () => {
+  getAllThreads = () => {
     this.threadsService.getThreads().subscribe(res => {
       this.threads = res;
       setTimeout(() => {
@@ -41,14 +40,12 @@ export class ThreadifyComponent implements OnInit {
     });
   }
 
-  threadInput2: string;
-
   onSubmit(thread_message) {
     if(thread_message){
       this.threadInput2 = '';
       var data = {
         message: thread_message,
-        sender: this.sender_name,
+        sender: this.user.displayName,
         timestamp: new Date()
       }
       this.threadsService.createThread(data);

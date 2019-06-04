@@ -1,9 +1,28 @@
-<div *ngIf="auth.user$ | async as user; else login">
-  {{user|json}}
-  <hr>
-  <button class="button" (click)="auth.signOut()">Sign Out</button>
-</div>
+<div mdbModal #login_modal="mdbModal" [config]="{ignoreBackdropClick: true}" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Login with Google</h4>
+      </div>
+      <div class="modal-body">
 
-<ng-template #login>
-  <button class="button" (click)="auth.googleSignin()">Sign in</button>
-</ng-template>
+        <div *ngIf="auth.user$ | async as user; else login">
+          <pre>
+            {{user|json}}
+          </pre>
+          <hr>
+          <button class="button" (click)="auth.signOut()">Sign Out</button>
+        </div>
+
+        <ng-template #login>
+          <button class="button" (click)="auth.googleSignin()">Sign in</button>
+        </ng-template>
+
+      </div>
+
+      <div *ngIf="auth.user$ | async" class="modal-footer justify-content-center">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="login_modal.hide()" mdbWavesEffect>Close</button>
+      </div>
+    </div>
+  </div>
+</div>

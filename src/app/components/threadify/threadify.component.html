@@ -34,18 +34,4 @@
 </div>
 
 
-<div mdbModal #name_input_modal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Enter your name</h4>
-      </div>
-      <div class="modal-body">
-        <input #name_input type="text" placeholder="name">
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button (click)="name_submit(name_input.value)" type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>OK!</button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-login></app-login>
