@@ -31,9 +31,23 @@ form{
 }
 
 .thread{
-  padding-left: 8px;
   margin: 12px 0;
+}
+
+.thread-message{
+  padding-left: 8px;
   border-left: 4px solid #acacac;
+}
+
+.sender-name{
+  margin-bottom: 0;
+  font-size: 0.75em;
+}
+
+.date{
+  font-size: 0.5em;
+  float: right;
+  padding: 0 12px;
 }
 
 @media (max-width: 768px){

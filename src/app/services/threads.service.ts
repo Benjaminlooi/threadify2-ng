@@ -15,12 +15,8 @@ export class ThreadsService {
   }
 
   createThread(data) {
-    var thread = {
-      message: data,
-      timestamp: new Date()
-    }
     return new Promise<any>((resolve, reject) => {
-      this.firestore.collection('threads_main').add(thread).then(res => { }, err => { reject(err) });
+      this.firestore.collection('threads_main').add(data).then(res => { }, err => { reject(err) });
     })
   }
 }
