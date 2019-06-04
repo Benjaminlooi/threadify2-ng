@@ -181,7 +181,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-auto row justify-content-center\">\n\n    <div class=\"thread-wrapper col\">\n      <div class=\"second-wrapper\" #container>\n\n        <ng-container *ngIf=\"threads\">\n\n          <div *ngFor=\"let thread of threads\" class=\"thread\">\n            {{thread.payload.doc.data().message}}\n          </div>\n        </ng-container>\n\n      </div>\n    </div>\n\n\n    <form (submit)=\"onSubmit(threadInput.value)\">\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input #threadInput mdbInput [(ngModel)]=\"threadInput2\" type=\"text\" class=\"form-control\" id=\"inputThread\" name=\"first\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <a (click)=\"onSubmit(threadInput.value)\" class=\"btn btn-primary btn-md w-100\">Spank Me</a>\n        </div>\n      </div>\n    </form>\n\n\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-auto row justify-content-center\">\n\n    <div class=\"thread-wrapper col\">\n      <div class=\"second-wrapper\" #container>\n\n        <ng-container *ngIf=\"threads\">\n\n          <div *ngFor=\"let thread of threads\" class=\"thread\">\n            <p class=\"sender-name\">{{thread.payload.doc.data().sender}}</p>\n            <span class=\"thread-message\">{{thread.payload.doc.data().message}}</span>\n            <span class=\"date\">{{thread.payload.doc.data().timestamp.toDate() | date: 'MMM d, h:mm a' }}</span>\n          </div>\n        </ng-container>\n\n      </div>\n    </div>\n\n    <form (submit)=\"onSubmit(threadInput.value)\">\n      <div class=\"form-row\">\n        <div class=\"col-md-9\">\n          <input #threadInput mdbInput [(ngModel)]=\"threadInput2\" type=\"text\" class=\"form-control\" id=\"inputThread\" name=\"first\" placeholder=\"Threadify\">\n        </div>\n        <div class=\"col-md-3\">\n\n          <a (click)=\"onSubmit(threadInput.value)\" class=\"btn btn-primary btn-md w-100\">Spank Me</a>\n        </div>\n      </div>\n    </form>\n\n  </div>\n\n</div>\n\n\n\n<button type=\"button\" mdbBtn color=\"primary\" class=\"relative waves-light\" (click)=\"basicModal.show()\" mdbWavesEffect> Launch demo modal</button>\n<div mdbModal #name_input_modal=\"mdbModal\" class=\"modal fade right\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myBasicModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"basicModal.hide()\">\n          <span aria-hidden=\"true\">×</span>\n        </button>\n        <h4 class=\"modal-title w-100\" id=\"myModalLabel\">Enter your name</h4>\n      </div>\n      <div class=\"modal-body\">\n        <input #name_input type=\"text\" placeholder=\"name\">\n      </div>\n      <div class=\"modal-footer justify-content-center\">\n        <button (click)=\"name_submit(name_input.value)\" type=\"button\" mdbBtn color=\"primary\" class=\"relative waves-light\" mdbWavesEffect>OK!</button>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -192,7 +192,7 @@ module.exports = "<div class=\"container\">\n\n  <div class=\"main-wrapper mx-au
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  height: 100vh;\n  width: 100vw; }\n\nform {\n  position: absolute;\n  width: 100%;\n  bottom: 15px; }\n\n.form-control {\n  margin: 0.375rem; }\n\n.main-wrapper {\n  height: 100%;\n  position: relative;\n  max-width: 720px; }\n\n.thread-wrapper {\n  height: 100vh;\n  padding-bottom: 66.1px; }\n\n.second-wrapper {\n  position: relative;\n  height: 100%;\n  overflow-y: scroll; }\n\n.thread {\n  padding-left: 8px;\n  margin: 12px 0;\n  border-left: 4px solid #acacac; }\n\n@media (max-width: 768px) {\n  .thread-wrapper {\n    padding-bottom: 106.1px; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aHJlYWRpZnkvRDpcXHhhbXBwXFxodGRvY3NcXGJlbnNhbml0eVxcdGhyZWFkaWZ5Mi1uZy9zcmNcXGFwcFxcY29tcG9uZW50c1xcdGhyZWFkaWZ5XFx0aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsWUFBWSxFQUFBOztBQUdkO0VBQ0Usa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxZQUFZLEVBQUE7O0FBR2Q7RUFDRSxnQkFBZ0IsRUFBQTs7QUFHbEI7RUFDRSxZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLGdCQUFnQixFQUFBOztBQUdsQjtFQUNFLGFBQWE7RUFDYixzQkFBc0IsRUFBQTs7QUFHeEI7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGtCQUFrQixFQUFBOztBQUdwQjtFQUNFLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsOEJBQThCLEVBQUE7O0FBR2hDO0VBQ0U7SUFDRSx1QkFBdUIsRUFBQSxFQUN4QiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGhyZWFkaWZ5L3RocmVhZGlmeS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXJ7XHJcbiAgaGVpZ2h0OiAxMDB2aDtcclxuICB3aWR0aDogMTAwdnc7XHJcbn1cclxuXHJcbmZvcm17XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGJvdHRvbTogMTVweDtcclxufVxyXG5cclxuLmZvcm0tY29udHJvbHtcclxuICBtYXJnaW46IDAuMzc1cmVtO1xyXG59XHJcblxyXG4ubWFpbi13cmFwcGVye1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgbWF4LXdpZHRoOiA3MjBweDtcclxufVxyXG5cclxuLnRocmVhZC13cmFwcGVye1xyXG4gIGhlaWdodDogMTAwdmg7XHJcbiAgcGFkZGluZy1ib3R0b206IDY2LjFweDtcclxufVxyXG5cclxuLnNlY29uZC13cmFwcGVye1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgb3ZlcmZsb3cteTogc2Nyb2xsO1xyXG59XHJcblxyXG4udGhyZWFke1xyXG4gIHBhZGRpbmctbGVmdDogOHB4O1xyXG4gIG1hcmdpbjogMTJweCAwO1xyXG4gIGJvcmRlci1sZWZ0OiA0cHggc29saWQgI2FjYWNhYztcclxufVxyXG5cclxuQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KXtcclxuICAudGhyZWFkLXdyYXBwZXJ7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTA2LjFweDtcclxuICB9XHJcbn0iXX0= */"
+module.exports = ".container {\n  height: 100vh;\n  width: 100vw; }\n\nform {\n  position: absolute;\n  width: 100%;\n  bottom: 15px; }\n\n.form-control {\n  margin: 0.375rem; }\n\n.main-wrapper {\n  height: 100%;\n  position: relative;\n  max-width: 720px; }\n\n.thread-wrapper {\n  height: 100vh;\n  padding-bottom: 66.1px; }\n\n.second-wrapper {\n  position: relative;\n  height: 100%;\n  overflow-y: scroll; }\n\n.thread {\n  margin: 12px 0; }\n\n.thread-message {\n  padding-left: 8px;\n  border-left: 4px solid #acacac; }\n\n.sender-name {\n  margin-bottom: 0;\n  font-size: 0.75em; }\n\n.date {\n  font-size: 0.5em;\n  float: right;\n  padding: 0 12px; }\n\n@media (max-width: 768px) {\n  .thread-wrapper {\n    padding-bottom: 106.1px; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aHJlYWRpZnkvRDpcXHhhbXBwXFxodGRvY3NcXGJlbnNhbml0eVxcdGhyZWFkaWZ5Mi1uZy9zcmNcXGFwcFxcY29tcG9uZW50c1xcdGhyZWFkaWZ5XFx0aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsWUFBWSxFQUFBOztBQUdkO0VBQ0Usa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxZQUFZLEVBQUE7O0FBR2Q7RUFDRSxnQkFBZ0IsRUFBQTs7QUFHbEI7RUFDRSxZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLGdCQUFnQixFQUFBOztBQUdsQjtFQUNFLGFBQWE7RUFDYixzQkFBc0IsRUFBQTs7QUFHeEI7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGtCQUFrQixFQUFBOztBQUdwQjtFQUNFLGNBQWMsRUFBQTs7QUFHaEI7RUFDRSxpQkFBaUI7RUFDakIsOEJBQThCLEVBQUE7O0FBR2hDO0VBQ0UsZ0JBQWdCO0VBQ2hCLGlCQUFpQixFQUFBOztBQUduQjtFQUNFLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZUFBZSxFQUFBOztBQUdqQjtFQUNFO0lBQ0UsdUJBQXVCLEVBQUEsRUFDeEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RocmVhZGlmeS90aHJlYWRpZnkuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVye1xyXG4gIGhlaWdodDogMTAwdmg7XHJcbiAgd2lkdGg6IDEwMHZ3O1xyXG59XHJcblxyXG5mb3Jte1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB3aWR0aDogMTAwJTtcclxuICBib3R0b206IDE1cHg7XHJcbn1cclxuXHJcbi5mb3JtLWNvbnRyb2x7XHJcbiAgbWFyZ2luOiAwLjM3NXJlbTtcclxufVxyXG5cclxuLm1haW4td3JhcHBlcntcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIG1heC13aWR0aDogNzIwcHg7XHJcbn1cclxuXHJcbi50aHJlYWQtd3JhcHBlcntcclxuICBoZWlnaHQ6IDEwMHZoO1xyXG4gIHBhZGRpbmctYm90dG9tOiA2Ni4xcHg7XHJcbn1cclxuXHJcbi5zZWNvbmQtd3JhcHBlcntcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcclxufVxyXG5cclxuLnRocmVhZHtcclxuICBtYXJnaW46IDEycHggMDtcclxufVxyXG5cclxuLnRocmVhZC1tZXNzYWdle1xyXG4gIHBhZGRpbmctbGVmdDogOHB4O1xyXG4gIGJvcmRlci1sZWZ0OiA0cHggc29saWQgI2FjYWNhYztcclxufVxyXG5cclxuLnNlbmRlci1uYW1le1xyXG4gIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgZm9udC1zaXplOiAwLjc1ZW07XHJcbn1cclxuXHJcbi5kYXRle1xyXG4gIGZvbnQtc2l6ZTogMC41ZW07XHJcbiAgZmxvYXQ6IHJpZ2h0O1xyXG4gIHBhZGRpbmc6IDAgMTJweDtcclxufVxyXG5cclxuQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KXtcclxuICAudGhyZWFkLXdyYXBwZXJ7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTA2LjFweDtcclxuICB9XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -209,6 +209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_threads_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/threads.service */ "./src/app/services/threads.service.ts");
+/* harmony import */ var angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular-bootstrap-md */ "./node_modules/angular-bootstrap-md/fesm5/angular-bootstrap-md.js");
+
 
 
 
@@ -228,18 +230,30 @@ var ThreadifyComponent = /** @class */ (function () {
     }
     ThreadifyComponent.prototype.ngOnInit = function () {
         this.getCoffeeOrders();
-        this.scrollToBottom();
     };
     ThreadifyComponent.prototype.ngAfterViewInit = function () {
-        this.scrollToBottom();
+        this.name_input_modal.show();
     };
-    ThreadifyComponent.prototype.onSubmit = function (data) {
+    ThreadifyComponent.prototype.name_submit = function (name) {
+        this.name_input_modal.hide();
+        this.sender_name = name;
+    };
+    ThreadifyComponent.prototype.onSubmit = function (thread_message) {
         this.threadInput2 = '';
+        var data = {
+            message: thread_message,
+            sender: this.sender_name,
+            timestamp: new Date()
+        };
         this.threadsService.createThread(data);
     };
     ThreadifyComponent.prototype.scrollToBottom = function () {
         this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
     };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('name_input_modal'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", angular_bootstrap_md__WEBPACK_IMPORTED_MODULE_3__["ModalDirective"])
+    ], ThreadifyComponent.prototype, "name_input_modal", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('container'),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
@@ -284,12 +298,8 @@ var ThreadsService = /** @class */ (function () {
     };
     ThreadsService.prototype.createThread = function (data) {
         var _this = this;
-        var thread = {
-            message: data,
-            timestamp: new Date()
-        };
         return new Promise(function (resolve, reject) {
-            _this.firestore.collection('threads_main').add(thread).then(function (res) { }, function (err) { reject(err); });
+            _this.firestore.collection('threads_main').add(data).then(function (res) { }, function (err) { reject(err); });
         });
     };
     ThreadsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
