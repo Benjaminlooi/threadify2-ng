@@ -44,13 +44,15 @@ export class ThreadifyComponent implements OnInit {
   threadInput2: string;
 
   onSubmit(thread_message) {
-    this.threadInput2 = '';
-    var data = {
-      message: thread_message,
-      sender: this.sender_name,
-      timestamp: new Date()
+    if(thread_message){
+      this.threadInput2 = '';
+      var data = {
+        message: thread_message,
+        sender: this.sender_name,
+        timestamp: new Date()
+      }
+      this.threadsService.createThread(data);
     }
-    this.threadsService.createThread(data);
   }
 
   private scrollToBottom() {
