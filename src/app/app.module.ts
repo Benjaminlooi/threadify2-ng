@@ -12,13 +12,15 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ThreadifyComponent } from './components/threadify/threadify.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
+import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThreadifyComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SideNavbarComponent
   ],
   imports: [
     BrowserModule,

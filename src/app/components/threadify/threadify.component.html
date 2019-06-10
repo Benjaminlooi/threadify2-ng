@@ -1,37 +1,35 @@
-<div class="container">
+<div class="main-wrapper mx-auto row justify-content-center">
 
-  <div class="main-wrapper mx-auto row justify-content-center">
+  <div class="thread-wrapper col">
+    <div class="second-wrapper" #container>
 
-    <div class="thread-wrapper col">
-      <div class="second-wrapper" #container>
+      <ng-container *ngIf="threads">
 
-        <ng-container *ngIf="threads">
+        <div *ngFor="let thread of threads" class="thread">
+          <p class="sender-name">{{thread.payload.doc.data().sender}}</p>
+          <span class="thread-message">{{thread.payload.doc.data().message}}</span>
+          <span class="date">{{thread.payload.doc.data().timestamp.toDate() | date: 'MMM d, h:mm a' }}</span>
+        </div>
+      </ng-container>
 
-          <div *ngFor="let thread of threads" class="thread">
-            <p class="sender-name">{{thread.payload.doc.data().sender}}</p>
-            <span class="thread-message">{{thread.payload.doc.data().message}}</span>
-            <span class="date">{{thread.payload.doc.data().timestamp.toDate() | date: 'MMM d, h:mm a' }}</span>
-          </div>
-        </ng-container>
-
-      </div>
     </div>
-
-    <form (submit)="onSubmit(threadInput.value)">
-      <div class="form-row">
-        <div class="col-md-9">
-          <input #threadInput mdbInput [(ngModel)]="threadInput2" type="text" class="form-control" id="inputThread" name="first" placeholder="Threadify" autocomplete="off">
-        </div>
-        <div class="col-md-3">
-
-          <a (click)="onSubmit(threadInput.value)" class="btn btn-primary btn-md w-100">Spank Me</a>
-        </div>
-      </div>
-    </form>
-
   </div>
 
+  <form (submit)="onSubmit(threadInput.value)">
+    <div class="form-row">
+      <div class="col-md-9">
+        <input #threadInput mdbInput [(ngModel)]="threadInput2" type="text" class="form-control" id="inputThread" name="first" placeholder="Threadify" autocomplete="off">
+      </div>
+      <div class="col-md-3">
+
+        <a (click)="onSubmit(threadInput.value)" class="btn btn-primary btn-md w-100">Spank Me</a>
+      </div>
+    </div>
+  </form>
+
 </div>
+
+
 
 
 <app-login></app-login>
